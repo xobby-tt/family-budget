@@ -1,0 +1,8 @@
+<h3 class="title">Отчет</h3>
+<div class="row">
+    <div class="col-md-12 form-group">
+        <input type="text" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" placeholder="date" class="form-control" bsDaterangepicker>
+    </div>
+</div>
+
+<div *ngIf="condition">hey</div>

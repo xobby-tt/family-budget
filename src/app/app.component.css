@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "RobotoRegular";
+  src: url("../fonts/RobotoRegular/RobotoRegular.eot");
+  src: url("../fonts/RobotoRegular/RobotoRegular.eot?#iefix")format("embedded-opentype"), url("../fonts/RobotoRegular/RobotoRegular.woff") format("woff"), url("../fonts/RobotoRegular/RobotoRegular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+body {
+  background-color: #F6F7F8;
+  font-size: 21px;
+  font-family: "RobotoRegular";
+}
+
+.header {
+  min-height: 10px;
+  color: #fff;
+  padding: 23px 0;
+}
+
+.nav-buttons a {
+  color: #fff;
+  display: block;
+  font-size: 30px;
+}
+
+.nav-buttons li .active,
+.nav-buttons li .active a:hover,
+.nav-buttons li a:hover {
+  background-color: #3B849A;
+}
+
+.main {
+  color: #5F5F5F;
+  margin: 50px 0;
+  padding: 20px 0;
+  border: 2px solid #E0E0E0;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: rgba(255, 255, 255, .3) 0 0 6px;
+}
+.title {
+    text-align: center;
+}

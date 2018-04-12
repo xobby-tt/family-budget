@@ -1,0 +1,7 @@
+.main {
+    background-color: rgb(250, 250, 167);
+}
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
