@@ -13,10 +13,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { InfoComponent } from './info/info.component';
 import { DisplayComponent } from './display/display.component';
 import { ReportComponent } from './report/report.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
-    AppComponent, InfoComponent, DisplayComponent, ReportComponent
+    AppComponent, InfoComponent, DisplayComponent, ReportComponent, ResultComponent
   ],
   imports: [
     BrowserModule,
