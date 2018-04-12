@@ -14,10 +14,11 @@ import { InfoComponent } from './info/info.component';
 import { DisplayComponent } from './display/display.component';
 import { ReportComponent } from './report/report.component';
 import { ResultComponent } from './result/result.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   declarations: [
-    AppComponent, InfoComponent, DisplayComponent, ReportComponent, ResultComponent
+    AppComponent, InfoComponent, DisplayComponent, ReportComponent, ResultComponent, AddComponent
   ],
   imports: [
     BrowserModule,
