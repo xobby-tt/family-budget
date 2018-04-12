@@ -19,10 +19,14 @@ export class AddComponent implements OnInit {
 
   items: Info[] = [];
 
-  constructor(private dataService: InfoService){}
-   
-  ngOnInit(){
-      this.items = this.dataService.getData();
+  constructor(private infoService: InfoService) { }
+
+  ngOnInit() {
+    this.getInfo();
+  }
+
+  getInfo(): void {
+    this.infoService.getInfo().subscribe(info => this.items = info)
   }
 
   add(category: string, subcategory: string, person: string, cash: number, date: string, comment: string) {

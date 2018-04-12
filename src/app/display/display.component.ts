@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { InfoService } from '../info.service'
 import { Info } from '../info';
 
@@ -8,13 +9,17 @@ import { Info } from '../info';
   styleUrls: ['./display.component.css']
 })
 export class DisplayComponent implements OnInit {
-  
+
   items: Info[] = [];
 
-  constructor(private dataService: InfoService){}
+  constructor(private infoService: InfoService){}
    
   ngOnInit(){
-      this.items = this.dataService.getData();
+      this.getInfo();
+  }
+
+  getInfo(): void {
+    this.infoService.getInfo().subscribe(info => this.items = info)
   }
 }
 

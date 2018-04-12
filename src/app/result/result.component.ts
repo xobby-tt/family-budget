@@ -13,16 +13,20 @@ export class ResultComponent implements OnInit {
   items: Info[] = [];
   condition: boolean = false;
 
-  constructor(private dataService: InfoService){}
-   
-  ngOnInit(){
-      this.items = this.dataService.getData();
+  constructor(private infoService: InfoService) { }
+
+  ngOnInit() {
+    this.getInfo();
   }
 
+  getInfo(): void {
+    this.infoService.getInfo().subscribe(info => this.items = info)
+  }
+  
   onDateChange() {
     this.condition = true;
   }
-  
+
 }
 
 
