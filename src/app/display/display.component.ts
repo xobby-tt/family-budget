@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service'
-import { Item } from '../item';
+import { InfoService } from '../info.service'
+import { Info } from '../info';
 
 @Component({
   selector: 'app-display',
@@ -8,8 +8,10 @@ import { Item } from '../item';
   styleUrls: ['./display.component.css']
 })
 export class DisplayComponent implements OnInit {
-  items: Item[] = [];
-  constructor(private dataService: DataService){}
+  
+  items: Info[] = [];
+
+  constructor(private dataService: InfoService){}
    
   ngOnInit(){
       this.items = this.dataService.getData();

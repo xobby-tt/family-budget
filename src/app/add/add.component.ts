@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service'
-import { Item } from '../item';
+import { InfoService } from '../info.service'
+import { Info } from '../info';
 
 @Component({
   selector: 'app-add',
@@ -17,16 +17,16 @@ export class AddComponent implements OnInit {
   date: string;
   comment: string;
 
-  items: Item[] = [];
+  items: Info[] = [];
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: InfoService){}
    
   ngOnInit(){
       this.items = this.dataService.getData();
   }
 
   add(category: string, subcategory: string, person: string, cash: number, date: string, comment: string) {
-    this.items.push(new Item(category, subcategory, person, cash, date, comment))
+    this.items.push(new Info(category, subcategory, person, cash, date, comment))
   }
 }
 

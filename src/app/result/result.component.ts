@@ -1,6 +1,6 @@
 import { Input, Component, OnInit } from '@angular/core';
-import { DataService } from '../data.service'
-import { Item } from '../item';
+import { InfoService } from '../info.service'
+import { Info } from '../info';
 
 @Component({
   selector: 'app-result',
@@ -10,10 +10,10 @@ import { Item } from '../item';
 
 export class ResultComponent implements OnInit {
   @Input() date: string;
-  items: Item[] = [];
+  items: Info[] = [];
   condition: boolean = false;
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: InfoService){}
    
   ngOnInit(){
       this.items = this.dataService.getData();

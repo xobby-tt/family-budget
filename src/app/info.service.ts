@@ -1,18 +1,18 @@
-import { Item } from './item'
+import { Info } from './info'
 
-export class DataService{
+export class InfoService{
  
-    private data: Item[] = [
+    private data: Info[] = [
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: "me", comment: "can you hear me? oooooooooooooдддддддддддддддддддддддддoo" },
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: "me", comment: "can you hear me? ooooooooooooooo" },
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: "me", comment: "can you hear me? " },
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: "me", comment: "can you hear me? ooooooooooooooo" },
 
     ];
-    getData(): Item[] {
+    getData(): Info[] {
         return this.data;
     }
     addData( category: string,  subcategory: string,  person: string,  cash: number,  date: string,  comment: string){
-        this.data.push(new Item(category, subcategory, person, cash, date, comment));
+        this.data.push(new Info(category, subcategory, person, cash, date, comment));
     }
 }
