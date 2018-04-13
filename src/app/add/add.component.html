@@ -12,36 +12,32 @@
   <div class="form-group row">
     <div class="col-md-1"></div>
     <label for="category" class="col-md-2 col-form-label">Категория</label>
-    <div class="col-md-4">
+
+    <div class="col-md-2">
       <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active">
-          Cras justo odio
-        </a>
-        <a *ngFor="let item of categories" class="list-group-item list-group-item-action" (click)="selectCategory(item.category)">
+        <a *ngFor="let item of categories" class="list-group-item list-group-item-action" (click)="selectCategory(item)" [class.active]="item.category == category">
           {{item.category}}
         </a>
       </div>
-      <div class="col-md-4">
-        <div class="list-group">
-          <div *ngFor="let item of categories" class="list-group-item list-group-item-action">
-            <div *ngIf="category == item" class="col-md-4">
-              <a *ngFor="let obj of category" class="list-group-item list-group-item-action">
-                {{obj.subcategory}}
-              </a>
-            </div>
-          </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="list-group">
+        <div *ngIf="category">
+          <a *ngFor="let item of selectedCategory.subcategory" class="list-group-item list-group-item-action" (click)="selectSubcategory(item)" [class.active]="item == subcategory">
+            {{item}}
+          </a>
         </div>
       </div>
     </div>
+
   </div>
-
-
 
   <div class="form-group row">
     <div class="col-md-1"></div>
     <label for="category" class="col-md-2 col-form-label">Сумма</label>
     <div class="col-md-8">
-      <input class="form-control" [(ngModel)]="subcategory">
+      <input class="form-control" [(ngModel)]="cash">
     </div>
   </div>
 

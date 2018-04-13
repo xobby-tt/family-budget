@@ -26,6 +26,8 @@ export class AddComponent implements OnInit {
   items: Info[] = [];
   categories: Category[] = [];
 
+  selectedCategory: Category;
+
   constructor(private infoService: InfoService, private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -60,13 +62,19 @@ export class AddComponent implements OnInit {
     this.person = "Сын";
   }
 
-  selectCategory(category: string): void {
-    this.category = category;
+  selectCategory(item: Category): void {
+    this.category = item.category;
+    this.selectedCategory = item;
+  }
+
+  selectSubcategory(item: string): void {
+    this.subcategory = item;
   }
 
   showDate(): string {
     return this.today.getDate().toString() + "/" + this.today.getMonth().toString() + "/" + this.today.getFullYear().toString()
   }
+
 
 }
 
