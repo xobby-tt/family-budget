@@ -21,6 +21,11 @@ export class DisplayComponent implements OnInit {
   getInfo(): void {
     this.infoService.getInfo().subscribe(info => this.items = info)
   }
+
+  showDate(item: Date): string {
+    return item.getDate().toString() + "/" + item.getMonth().toString() + "/" + item.getFullYear().toString()
+  }
+
 }
 
 

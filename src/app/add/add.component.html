@@ -3,9 +3,9 @@
     <div class="col-md-1"></div>
     <label for="person" class="col-md-2 col-form-label">Член семьи</label>
     <div class="col-md-8">
-      <button type="button" (click)="selectHusband()" class="btn btn-outline-primary">Муж</button>
-      <button type="button" (click)="selectWife()" class="btn btn-outline-primary">Жена</button>
-      <button type="button" (click)="selectSon()" class="btn btn-outline-primary">Сын</button>
+      <button type="button" (click)="selectPerson('муж')" class="btn btn-outline-primary">Муж</button>
+      <button type="button" (click)="selectPerson('жена')" class="btn btn-outline-primary">Жена</button>
+      <button type="button" (click)="selectPerson('сын')" class="btn btn-outline-primary">Сын</button>
     </div>
   </div>
 
@@ -62,9 +62,9 @@
       <div class="col-md-8"></div>
       <div class="col-md-4">
         <!-- ==============to do==================== -->
-        <button (click)="add(category, subcategory, name, cash, date, comment)" class="btn btn-primary">Сохранить</button>
+        <button (click)="add(category, subcategory, person, cash, date, comment)" class="btn btn-primary">Сохранить</button>
         <button type="button" class="btn btn-danger" routerLink="">Отменить</button>
-
+        
       </div>
     </div>
   </div>

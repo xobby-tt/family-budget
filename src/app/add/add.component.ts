@@ -23,6 +23,17 @@ export class AddComponent implements OnInit {
   date: string;
   comment: string;
 
+  add(category: string, subcategory: string, person: string, cash: number, date: Date, comment: string) {
+    if(!date) {
+      date = this.today;
+    }
+    this.infoService.addInfo(category, subcategory, person, cash, date, comment);
+  }
+
+  selectPerson(item: string): void{
+    this.person = item;
+  }
+
   items: Info[] = [];
   categories: Category[] = [];
 
@@ -43,25 +54,6 @@ export class AddComponent implements OnInit {
     this.categoryService.getCategory().subscribe(category => this.categories = category);
   }
 
-  add(category: string, subcategory: string, person: string, cash: number, date: Date, comment: string) {
-    if(!date) {
-      date = this.today;
-    }
-    this.infoService.addInfo(category, subcategory, person, cash, date, comment);
-  }
-
-  selectHusband(): void{
-    this.person = "Муж";
-  }
-
-  selectWife(): void {
-    this.person = "Жена";
-  }
-
-  selectSon(): void {
-    this.person = "Сын";
-  }
-
   selectCategory(item: Category): void {
     this.category = item.category;
     this.selectedCategory = item;
@@ -74,8 +66,6 @@ export class AddComponent implements OnInit {
   showDate(): string {
     return this.today.getDate().toString() + "/" + this.today.getMonth().toString() + "/" + this.today.getFullYear().toString()
   }
-
-
 }
 
 
