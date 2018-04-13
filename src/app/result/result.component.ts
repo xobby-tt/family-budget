@@ -2,6 +2,8 @@ import { Input, Component, OnInit } from '@angular/core';
 import { InfoService } from '../info.service'
 import { Info } from '../info';
 
+import { CategoryCash } from '../categoryCash'
+
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -13,7 +15,9 @@ export class ResultComponent implements OnInit {
   @Input() date: Date[];
 
   items: Info[] = [];
-  sorted: Info[];
+  sortedByDate: Info[] = [];
+  categories: string[] = [];
+  categoryCash: CategoryCash[] = [];
   selectedIncome: boolean = true;
 
   constructor(private infoService: InfoService) { }
@@ -24,12 +28,9 @@ export class ResultComponent implements OnInit {
 
   ngDoCheck() {
     this.sortByDate();
+    this.sortByCategory();
+    this.onSelect("income");
   }
-
-  clearPrevData() {
-    this.items = [];
-    this.sorted = null;
-  } 
 
   getInfo(): void {
     this.infoService.getInfo().subscribe(info => this.items = info)
@@ -37,41 +38,45 @@ export class ResultComponent implements OnInit {
 
   sortByDate(): void {
     var items = this.infoService.sortByDate(this.date);
-    if(items)
-      this.sorted = items;
+    if (items)
+      this.sortedByDate = items;
   }
 
-  sortByCategory(): object {
+  sortByCategory(): void {
     var temp: object = {};
 
-    for (var i = 0; i < this.sorted.length; i++) {
-      if (temp[this.sorted[i].category] === undefined) 
-        temp[this.sorted[i].category] = 0;
-    }
-
-    for (var key in temp) {
-      for (var i = 0; i < this.sorted.length; i++) {
-        if (key == this.sorted[i].category)
-          temp[key] += this.sorted[i].cash;
+    for (let item of this.sortedByDate) {
+      if (temp[item.category] === undefined) {
+        temp[item.category] = 0;
+        this.categories.push(item.category);
       }
     }
-
-    return temp
   }
 
-  result(): number {
-      
+  getResult(): number {
+    var temp: object = {};
     var sum: number = 0;
-    var temp: object = this.sortByCategory();
 
-    for (var item in temp)
-      sum += temp[item];
+    for (let item of this.sortedByDate)
+      sum += item.cash;
 
     return sum;
   }
 
-  onSelect(): void {
-    this.selectedIncome = !this.selectedIncome;
+  onSelect(condition: string): void {
+    var sum = 0;
+    this.categoryCash = [];
+
+    for (let categoryItem of this.categories) {
+      for (let item of this.sortedByDate) {
+        if (categoryItem == item.category) {
+          if (condition == "income" ? (item.cash > 0) : (item.cash < 0)) {
+            sum += item.cash;
+          }
+        }
+      }
+        this.categoryCash.push(new CategoryCash(categoryItem, sum));
+    }
   }
 }
 
