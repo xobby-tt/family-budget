@@ -1,5 +1,18 @@
-<div *ngIf="sorted">
-  <div *ngFor="let item of sorted">
-    {{item.category}}
-  </div>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="selectedIncome" (click)="onSelect()">+ Sum</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [class.active]="!selectedIncome" (click)="onSelect()">-Sum</a>
+  </li>
+  
+</ul>
+<div *ngIf="selectedIncome">
+  <app-income [items]="sorted"></app-income>
 </div>
+
+<div *ngIf="!selectedIncome">
+  <app-outcome [items]="sorted"></app-outcome>
+</div>
+
+<div> result: {{result()}} </div>

@@ -6,7 +6,7 @@ import { Info } from './info'
 export class InfoService{
  
     private data: Info[] = [
-        { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: new Date("April 4, 2018 10:13:00"), comment: "can you hear me? oooooooooooooдддддддддддддддддддддддддoo" },
+        { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: -200, date: new Date("April 4, 2018 10:13:00"), comment: "can you hear me? oooooooooooooдддддддддддддддддддддддддoo" },
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: new Date("April 4, 2018 10:13:00"), comment: "can you hear me? ooooooooooooooo" },
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: new Date("April 4, 2018 10:13:00"), comment: "can you hear me? " },
         { category:"Apple iPhone 7", subcategory: "hello", person: "it", cash: 200, date: new Date("April 4, 2018 10:13:00"), comment: "can you hear me? ooooooooooooooo" },
@@ -27,4 +27,5 @@ export class InfoService{
         }
         return temp;
     }
+
 }

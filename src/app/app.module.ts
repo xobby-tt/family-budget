@@ -17,10 +17,14 @@ import { DisplayComponent } from './display/display.component';
 import { ReportComponent } from './report/report.component';
 import { ResultComponent } from './result/result.component';
 import { AddComponent } from './add/add.component';
+import { IncomeComponent } from './income/income.component';
+import { OutcomeComponent } from './outcome/outcome.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent, InfoComponent, DisplayComponent, ReportComponent, ResultComponent, AddComponent
+    AppComponent, InfoComponent, DisplayComponent, ReportComponent, ResultComponent, AddComponent, IncomeComponent, OutcomeComponent
   ],
   imports: [
     BrowserModule,

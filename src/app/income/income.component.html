@@ -1,0 +1,19 @@
+<div *ngIf="sorted">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Категория</th>
+        <th>Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of sorted">
+        <td>{{item.category}}</td>
+        <td>{{item.cash}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!sorted">null</div>
+
