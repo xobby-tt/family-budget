@@ -49,7 +49,7 @@ export class AddComponent implements OnInit {
   add(category: string, subcategory: string, person: string, cash: number, dateString: string, comment: string) {
     var date: Date;
 
-    if(!date) {
+    if(!dateString) {
       date = this.today;
     } else date = new Date(dateString);
 
@@ -71,7 +71,7 @@ export class AddComponent implements OnInit {
   }
 
   showDate(): string {
-    return this.today.getDate().toString() + "/" + this.today.getMonth().toString() + "/" + this.today.getFullYear().toString()
+    return this.today.getDate() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getFullYear()
   }
 
   goBack(): void {

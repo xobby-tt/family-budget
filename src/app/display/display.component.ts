@@ -23,7 +23,7 @@ export class DisplayComponent implements OnInit {
   }
 
   showDate(item: Date): string {
-    return item.getDate().toString() + "/" + item.getMonth().toString() + "/" + item.getFullYear().toString()
+    return item.getDate() + "/" + (item.getMonth() + 1) + "/" + item.getFullYear()
   }
 
 }

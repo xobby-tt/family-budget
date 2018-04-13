@@ -19,8 +19,10 @@ export class ResultComponent implements OnInit {
   constructor(private infoService: InfoService) { }
 
   ngOnInit() {
-    this.clearPrevData();
     this.getInfo();
+  }
+
+  ngDoCheck() {
     this.sortByDate();
   }
 
