@@ -46,11 +46,11 @@ export class AddComponent implements OnInit {
   }
 
   
-  add(category: string, subcategory: string, person: string, cash: number, date: Date, comment: string) {
+  add(category: string, subcategory: string, person: string, cash: number, date: string, comment: string) {
     if(!date) {
       date = this.today;
     }
-    this.infoService.addInfo(category, subcategory, person, cash, date, comment);
+    this.infoService.addInfo(category, subcategory, person, cash, new Date(date), comment);
     this.location.back();
   }
 
