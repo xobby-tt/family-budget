@@ -1,0 +1,14 @@
+.selected {
+  background-color: lightblue; 
+}
+.myBtn:hover {
+  background-color: lightblue; 
+}
+
+.main {
+  margin-top: 50px;
+}
+
+.form-items {
+  margin: 10px;
+}

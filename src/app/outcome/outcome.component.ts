@@ -22,12 +22,11 @@ export class OutcomeComponent implements OnInit {
 
   sortByCategory(): SortedCategory[] {
     var temp: object = {};
-    var a: SortedCategory;
     var array: SortedCategory[] = [];
 
     for (var i = 0; i < this.items.length; i++) {
       if (temp[this.items[i].category] === undefined)
-        temp[this.items[i].category] = true;
+        temp[this.items[i].category] = 0;
 
         var flag: boolean = false;
 

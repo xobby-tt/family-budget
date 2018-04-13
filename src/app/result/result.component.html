@@ -1,18 +1,24 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" [class.active]="selectedIncome" (click)="onSelect()">+ Sum</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [class.active]="!selectedIncome" (click)="onSelect()">-Sum</a>
-  </li>
-  
-</ul>
-<div *ngIf="selectedIncome">
-  <app-income [items]="sorted"></app-income>
-</div>
+<div class="main">
+  <div *ngIf="sorted.length">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedIncome" (click)="onSelect()">+ Sum</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="!selectedIncome" (click)="onSelect()">-Sum</a>
+      </li>
 
-<div *ngIf="!selectedIncome">
-  <app-outcome [items]="sorted"></app-outcome>
-</div>
+    </ul>
+    <div *ngIf="selectedIncome">
+      <app-income [items]="sorted"></app-income>
+    </div>
 
-<div> result: {{result()}} </div>
+    <div *ngIf="!selectedIncome">
+      <app-outcome [items]="sorted"></app-outcome>
+    </div>
+
+    <div> Всего денег: {{result()}} </div>
+  </div>
+
+  <div *ngIf="!sorted.length">Нет данных в этом промежутке</div>
+</div>

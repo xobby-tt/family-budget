@@ -19,30 +19,38 @@ export class ResultComponent implements OnInit {
   constructor(private infoService: InfoService) { }
 
   ngOnInit() {
+    this.clearPrevData();
     this.getInfo();
     this.sortByDate();
   }
+
+  clearPrevData() {
+    this.items = [];
+    this.sorted = null;
+  } 
 
   getInfo(): void {
     this.infoService.getInfo().subscribe(info => this.items = info)
   }
 
-  sortByDate(): Info[] {
-    return this.sorted = this.infoService.sortByDate(this.date);
+  sortByDate(): void {
+    var items = this.infoService.sortByDate(this.date);
+    if(items)
+      this.sorted = items;
   }
 
   sortByCategory(): object {
     var temp: object = {};
 
-    for (var i = 0; i < this.items.length; i++) {
-      if (temp[this.items[i].category] === undefined) 
-        temp[this.items[i].category] = true;
+    for (var i = 0; i < this.sorted.length; i++) {
+      if (temp[this.sorted[i].category] === undefined) 
+        temp[this.sorted[i].category] = 0;
     }
 
     for (var key in temp) {
-      for (var i = 0; i < this.items.length; i++) {
-        if (key == this.items[i].category)
-          temp[key] += this.items[i].cash;
+      for (var i = 0; i < this.sorted.length; i++) {
+        if (key == this.sorted[i].category)
+          temp[key] += this.sorted[i].cash;
       }
     }
 

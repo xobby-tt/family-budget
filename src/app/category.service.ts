@@ -6,7 +6,9 @@ import { Category } from './category'
 export class CategoryService{
  
     private data: Category[] = [
-        { category:"Apple iPhone 7", subcategory: ["hello", "hey", "la la"] }
+        { category:"Продукты", subcategory: ["магазин", "ресторан", "корм"] }, 
+        { category:"Зп", subcategory: [] }
+
     ];
     getCategory(): Observable<Category[]> {
         return of(this.data);

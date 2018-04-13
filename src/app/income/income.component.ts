@@ -22,21 +22,21 @@ export class IncomeComponent implements OnInit {
 
   sortByCategory(): SortedCategory[] {
     var temp: object = {};
-    var a: SortedCategory;
     var array: SortedCategory[] = [];
 
     for (var i = 0; i < this.items.length; i++) {
       if (temp[this.items[i].category] === undefined)
-        temp[this.items[i].category] = true;
+        temp[this.items[i].category] = 0;
 
-        var flag: boolean = false;
+      var flag: boolean = false;
 
       for (var key in temp) {
         for (var i = 0; i < this.items.length; i++) {
           flag = false;
-          if (key == this.items[i].category && this.items[i].cash > 0)
+          if (key == this.items[i].category && this.items[i].cash > 0) {
             temp[key] += this.items[i].cash
             flag = true;          
+          }
         }
         if (flag) {
           array.push(new SortedCategory(key, temp[key]))
