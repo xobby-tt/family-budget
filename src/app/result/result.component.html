@@ -1,1 +1,5 @@
-<div>Дата: {{date}}</div>
+<div *ngIf="sorted">
+  <div *ngFor="let item of sorted">
+    {{item.category}}
+  </div>
+</div>

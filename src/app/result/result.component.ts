@@ -9,24 +9,26 @@ import { Info } from '../info';
 })
 
 export class ResultComponent implements OnInit {
-  @Input() date: string;
+
+  @Input() date: Date[];
+
   items: Info[] = [];
-  condition: boolean = false;
+  sorted: Info[];
 
   constructor(private infoService: InfoService) { }
 
   ngOnInit() {
     this.getInfo();
+    this.sortByDate();
   }
 
   getInfo(): void {
     this.infoService.getInfo().subscribe(info => this.items = info)
   }
-  
-  onDateChange() {
-    this.condition = true;
-  }
 
+  sortByDate(): Info[] {
+    return this.sorted = this.infoService.sortByDate(this.date);
+  }
 }
 
 

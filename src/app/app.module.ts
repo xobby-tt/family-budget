@@ -6,7 +6,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { InfoService } from './info.service'
+import { InfoService } from './info.service';
+import { CategoryService } from './category.service';
+
 import { AlertModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 
@@ -27,7 +29,7 @@ import { AddComponent } from './add/add.component';
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot()
   ],
-  providers: [InfoService],
+  providers: [InfoService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

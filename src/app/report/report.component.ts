@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ReportComponent {
-  date: string;
+  date: Date[];
   condition: boolean = false;
 
   onDateChange() {
