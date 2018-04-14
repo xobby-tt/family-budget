@@ -18,18 +18,19 @@ export class ResultComponent implements OnInit {
   sortedByDate: Info[] = [];
   categories: string[] = [];
   categoryCash: CategoryCash[] = [];
-  selectedIncome: boolean = true;
+  selected: string = "income";
 
   constructor(private infoService: InfoService) { }
 
   ngOnInit() {
     this.getInfo();
+    this.sortByDate();
+    this.sortByCategory();
+    this.onSelect("income");
   }
 
   ngDoCheck() {
     this.sortByDate();
-    this.sortByCategory();
-    this.onSelect("income");
   }
 
   getInfo(): void {
@@ -64,10 +65,10 @@ export class ResultComponent implements OnInit {
   }
 
   onSelect(condition: string): void {
-    var sum = 0;
     this.categoryCash = [];
 
     for (let categoryItem of this.categories) {
+      var sum = 0;
       for (let item of this.sortedByDate) {
         if (categoryItem == item.category) {
           if (condition == "income" ? (item.cash > 0) : (item.cash < 0)) {
@@ -75,8 +76,11 @@ export class ResultComponent implements OnInit {
           }
         }
       }
+      if (sum)
         this.categoryCash.push(new CategoryCash(categoryItem, sum));
     }
+    if (this.selected.indexOf(condition) == -1)
+      this.selected = condition;
   }
 }
 

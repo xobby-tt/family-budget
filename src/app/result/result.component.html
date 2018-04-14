@@ -2,10 +2,10 @@
   <div *ngIf="sortedByDate.length">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link" [class.active]="selectedIncome" (click)="onSelect('income')">+ Sum</a>
+        <a class="nav-link" [class.active]="selected == 'income'" (click)="onSelect('income')">+ Sum</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [class.active]="!selectedIncome" (click)="onSelect('outcome')">-Sum</a>
+        <a class="nav-link" [class.active]="selected == 'outcome'" (click)="onSelect('outcome')">-Sum</a>
       </li>
 
     </ul>
