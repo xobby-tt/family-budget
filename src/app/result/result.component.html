@@ -1,24 +1,34 @@
 <div class="main">
-  <div *ngIf="sorted.length">
+  <div *ngIf="sortedByDate.length">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link" [class.active]="selectedIncome" (click)="onSelect()">+ Sum</a>
+        <a class="nav-link" [class.active]="selected == 'income'" (click)="onSelect('income')">+ Sum</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [class.active]="!selectedIncome" (click)="onSelect()">-Sum</a>
+        <a class="nav-link" [class.active]="selected == 'outcome'" (click)="onSelect('outcome')">-Sum</a>
       </li>
 
     </ul>
-    <div *ngIf="selectedIncome">
-      <app-income [items]="sorted"></app-income>
-    </div>
-
-    <div *ngIf="!selectedIncome">
-      <app-outcome [items]="sorted"></app-outcome>
-    </div>
-
-    <div class="result"> Всего денег: {{result()}} </div>
+    
+    <div *ngIf="categoryCash">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Категория</th>
+              <th>Сумма</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of categoryCash">
+              <td>{{item.category}}</td>
+              <td>{{item.cash}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    <div class="result"> Всего денег: {{getResult()}} </div>
   </div>
 
-  <div *ngIf="!sorted.length">Нет данных в этом промежутке</div>
+  <div *ngIf="!sortedByDate.length">Нет данных в этом промежутке</div>
 </div>

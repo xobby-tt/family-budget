@@ -64,6 +64,7 @@ export class AddComponent implements OnInit {
   selectCategory(item: Category): void {
     this.category = item.category;
     this.selectedCategory = item;
+    this.subcategory = "";
   }
 
   selectSubcategory(item: string): void {
