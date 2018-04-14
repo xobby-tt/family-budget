@@ -10,19 +10,23 @@ export class InfoService{
         { category:"Зп", subcategory: "", person: "Муж", cash: 200, date: new Date("April 4, 2018 10:13:00"), comment: "" },
         { category:"Продукты", subcategory: "корм", person: "Жена", cash: -200, date: new Date("April 4, 2018 10:13:00"), comment: "вискас" },
     ];
+    
     getInfo(): Observable<Info[]> {
         return of(this.data);
       }
+
     addInfo( category: string,  subcategory: string,  person: string,  cash: number,  date: Date,  comment: string){
         this.data.push(new Info(category, subcategory, person, cash, date, comment));
     }
+
     sortByDate(date: Date[]) : Info[] {
         var temp: Info[] = [];
 
-        for (var i = 0; i < this.data.length; i++) {
-            if (this.data[i].date.valueOf() > date[0].valueOf() && this.data[i].date.valueOf() < date[1].valueOf())
-                temp.push(this.data[i]);
+        for (var item of this.data) {
+            if (item.date.valueOf() > date[0].valueOf() && item.date.valueOf() < date[1].valueOf())
+                temp.push(item);
         }
+
         return temp;
     }
 
