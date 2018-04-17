@@ -24,6 +24,7 @@ import { AddComponent } from './add/add.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     AlertModule.forRoot(),

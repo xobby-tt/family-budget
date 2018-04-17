@@ -12,3 +12,7 @@
 .form-items {
   margin: 10px;
 }
+
+.alert {
+  color: red;
+}

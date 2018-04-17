@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { InfoService } from '../info.service';
 import { Info } from '../info';
-
 import { CategoryService } from '../category.service';
 import { Category } from '../category';
 
@@ -17,18 +17,16 @@ import { Category } from '../category';
 export class AddComponent implements OnInit {
 
   today: Date = new Date();
-
   category: string;
   subcategory: string;
   person: string;
   cash: number;
-  date: string;
+  date: Date;
   comment: string;
-
   items: Info[] = [];
   categories: Category[] = [];
-
   selectedCategory: Category;
+  isDateSelected: boolean = false;
 
   constructor(private infoService: InfoService, private categoryService: CategoryService, private location: Location) { }
 
@@ -45,19 +43,18 @@ export class AddComponent implements OnInit {
     this.categoryService.getCategory().subscribe(category => this.categories = category);
   }
 
-  
-  add(category: string, subcategory: string, person: string, cash: number, dateString: string, comment: string) {
-    var date: Date;
+  add(category: string, subcategory: string, person: string, cash: number, date: Date, comment: string) {
 
-    if(!dateString) {
+    if (!date) {
       date = this.today;
-    } else date = new Date(dateString);
+    }
 
     this.infoService.addInfo(category, subcategory, person, cash, date, comment);
     this.location.back();
+
   }
 
-  selectPerson(item: string): void{
+  selectPerson(item: string): void {
     this.person = item;
   }
 
@@ -75,11 +72,15 @@ export class AddComponent implements OnInit {
     return this.today.getDate() + "/" + (this.today.getMonth() + 1) + "/" + this.today.getFullYear()
   }
 
+  toggleDatepicker(): void {
+    this.isDateSelected = !this.isDateSelected;
+  }
+
   goBack(): void {
     this.location.back();
   }
 
-  
+
   // onCashChange(e): void {
   //   if(this.isNumeric(e.target.value)) this.cash += e.target.value;
   // }
