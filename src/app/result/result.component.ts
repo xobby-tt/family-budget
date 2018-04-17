@@ -1,7 +1,9 @@
 import { Input, Component, OnInit } from '@angular/core';
-import { InfoService } from '../info.service'
-import { Info } from '../info';
 
+import { InfoService } from '../info.service'
+import { CategoryService } from '../category.service'
+import { Info } from '../info';
+import { Category } from '../category';
 import { CategoryCash } from '../categoryCash'
 
 @Component({
@@ -16,16 +18,16 @@ export class ResultComponent implements OnInit {
 
   items: Info[] = [];
   sortedByDate: Info[] = [];
-  categories: string[] = [];
+  categories: Category[];
   categoryCash: CategoryCash[] = [];
   selected: string = "income";
 
-  constructor(private infoService: InfoService) { }
+  constructor(private infoService: InfoService, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.getInfo();
     this.sortByDate();
-    this.sortByCategory();
+    this.getCategories();
     this.onSelect("income");
   }
 
@@ -37,21 +39,14 @@ export class ResultComponent implements OnInit {
     this.infoService.getInfo().subscribe(info => this.items = info)
   }
 
+  getCategories(): void {
+    this.categoryService.getCategory().subscribe(categories => this.categories = categories)
+  }
+
   sortByDate(): void {
     var items = this.infoService.sortByDate(this.date);
     if (items)
       this.sortedByDate = items;
-  }
-
-  sortByCategory(): void {
-    var temp: object = {};
-
-    for (let item of this.sortedByDate) {
-      if (temp[item.category] === undefined) {
-        temp[item.category] = 0;
-        this.categories.push(item.category);
-      }
-    }
   }
 
   getResult(): number {
@@ -70,14 +65,14 @@ export class ResultComponent implements OnInit {
     for (let categoryItem of this.categories) {
       var sum = 0;
       for (let item of this.sortedByDate) {
-        if (categoryItem == item.category) {
+        if (categoryItem.category == item.category) {
           if (condition == "income" ? (item.cash > 0) : (item.cash < 0)) {
             sum += item.cash;
           }
         }
       }
       if (sum)
-        this.categoryCash.push(new CategoryCash(categoryItem, sum));
+        this.categoryCash.push(new CategoryCash(categoryItem.category, sum));
     }
     if (this.selected.indexOf(condition) == -1)
       this.selected = condition;
