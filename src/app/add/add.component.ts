@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { InfoService } from '../info.service';
 import { Info } from '../info';
+
 import { CategoryService } from '../category.service';
 import { Category } from '../category';
 
@@ -17,55 +18,50 @@ import { Category } from '../category';
 export class AddComponent implements OnInit {
 
   today: Date = new Date();
-  category: string;
-  subcategory: string;
-  person: string;
-  cash: number;
-  date: Date;
-  comment: string;
-  items: Info[] = [];
+
+  infoForm: FormGroup;
   categories: Category[] = [];
-  selectedCategory: Category;
   isDateSelected: boolean = false;
 
-  constructor(private infoService: InfoService, private categoryService: CategoryService, private location: Location) { }
+  selectedCategory: Category;
+
+  personStates = [
+    {name: 'муж'},
+    {name: 'жена'},
+    {name: 'сын'}
+  ];
+
+  constructor(private infoService: InfoService, private categoryService: CategoryService, private location: Location,  public form: FormBuilder) { }
 
   ngOnInit() {
-    this.getInfo();
     this.getCategories();
+
+    this.buildForm();
   }
 
-  getInfo(): void {
-    this.infoService.getInfo().subscribe(info => this.items = info);
+  public buildForm() {
+    this.infoForm = this.form.group({
+      categoryState: ['', Validators.required],
+      subcategoryState: [''],
+      personState: ['',  Validators.required],
+      cash: ['',  Validators.required],
+      date: [''],
+      comment: [''],
+    });
   }
 
   getCategories(): void {
     this.categoryService.getCategory().subscribe(category => this.categories = category);
   }
 
-  add(category: string, subcategory: string, person: string, cash: number, date: Date, comment: string) {
+  onSubmit() {
 
-    if (!date) {
-      date = this.today;
-    }
+    if(!this.infoForm.value.date) {
+      this.infoForm.value.date = this.today;
+    } else this.infoForm.value.date = new Date(this.infoForm.value.date);
 
-    this.infoService.addInfo(category, subcategory, person, cash, date, comment);
+    this.infoService.addInfo(this.infoForm.value.categoryState.category, this.infoForm.value.subcategoryState, this.infoForm.value.personState.name, +this.infoForm.value.cash, this.infoForm.value.date, this.infoForm.value.comment);
     this.location.back();
-
-  }
-
-  selectPerson(item: string): void {
-    this.person = item;
-  }
-
-  selectCategory(item: Category): void {
-    this.category = item.category;
-    this.selectedCategory = item;
-    this.subcategory = "";
-  }
-
-  selectSubcategory(item: string): void {
-    this.subcategory = item;
   }
 
   showDate(): string {
@@ -80,7 +76,7 @@ export class AddComponent implements OnInit {
     this.location.back();
   }
 
-
+  
   // onCashChange(e): void {
   //   if(this.isNumeric(e.target.value)) this.cash += e.target.value;
   // }

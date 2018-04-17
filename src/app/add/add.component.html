@@ -1,74 +1,92 @@
-<div class="form-group row form-item">
-  <div class="col-md-1"></div>
-  <label for="person" class="col-md-2 col-form-label">Член семьи</label>
+<form class="form" [formGroup]="infoForm" novalidate (ngSubmit)="onSubmit()">
 
-  <div class="col-md-3">
-    <button type="button" (click)="selectPerson('муж')" class="btn btn-light myBtn" [class.selected]="person == 'муж'">Муж</button>
-    <button type="button" (click)="selectPerson('жена')" class="btn btn-light myBtn" [class.selected]="person == 'жена'">Жена</button>
-    <button type="button" (click)="selectPerson('сын')" class="btn btn-light myBtn" [class.selected]="person == 'сын'">Сын</button>
-  </div>
-</div>
-
-<div class="form-group row form-item">
-  <div class="col-md-1"></div>
-  <label for="category" class="col-md-2 col-form-label">Категория</label>
-
-  <div class="col-md-2">
-    <div class="list-group">
-      <a *ngFor="let item of categories" class="list-group-item list-group-item-action" (click)="selectCategory(item)" [class.selected]="item.category == category">
-        {{item.category}}
-      </a>
-    </div>
-  </div>
-
-  <div class="col-md-2">
-    <div class="list-group">
-      <div *ngIf="category">
-        <a *ngFor="let item of selectedCategory.subcategory" class="list-group-item list-group-item-action" (click)="selectSubcategory(item)"
-          [class.selected]="item == subcategory">
-          {{item}}
-        </a>
+    <div class="form-group row form-item">
+      <div class="col-md-1"></div>
+      <label for="person" class="col-md-2 col-form-label">Член семьи<span class="obliged">*</span></label>
+      <div class="col-md-8">
+        <select formControlName="personState" class="form-control">
+          <option *ngFor="let personState of personStates" [ngValue]="personState">
+            {{ personState.name }}
+          </option>
+        </select>
       </div>
     </div>
-  </div>
-
-</div>
-
-<div class="form-group row form-item">
-  <div class="col-md-1"></div>
-  <label for="category" class="col-md-2 col-form-label">Сумма</label>
-  <div class="col-md-8">
-    <!-- to do: (keypress)="onCashChange($event)"-->
-    <input class="form-control" [(ngModel)]="cash">
-  </div>
-</div>
-
-<div class="form-group row form-item">
-  <div class="col-md-1"></div>
-  <label for="category" class="col-md-2 col-form-label">Дата</label>
-  <div class="col-md-8">
-    <div>
-      <input type="text" [(ngModel)]="date" placeholder={{showDate()}} class="form-control" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-        bsDatepicker>
+  
+    <div class="form-group row form-item">
+      <div class="col-md-1"></div>
+      <label for="category" class="col-md-2 col-form-label">Категория<span class="obliged">*</span></label>
+  
+      <div class="col-md-8">
+        <select formControlName="categoryState" class="form-control">
+          <option *ngFor="let categoryState of categories" [ngValue]="categoryState">
+            {{ categoryState.category }}
+          </option>
+        </select>
+      </div>
     </div>
-  </div>
-</div>
-
-
-<div class="form-group row form-item">
-  <div class="col-md-1"></div>
-  <label for="category" class="col-md-2 col-form-label">Комментарий</label>
-  <div class="col-md-8">
-    <input class="form-control" [(ngModel)]="comment">
-  </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-8"></div>
-    <div class="col-md-4">
-      <button (click)="add(category, subcategory, person, cash, date, comment)" class="btn btn-primary">Сохранить</button>
-      <button type="button" class="btn btn-danger" (click)="goBack()">Отменить</button>
+  
+    <div class="form-group row form-item">
+      <div class="col-md-1"></div>
+      <label for="category" class="col-md-2 col-form-label">Подкатегория</label>
+  
+      <div class="col-md-8">
+        <div *ngIf="!infoForm.value.categoryState">
+          <fieldset disabled>
+            <input class="form-control" placeholder="Выберите категорию">
+          </fieldset>
+        </div>
+  
+        <div *ngIf="infoForm.value.categoryState">
+          <div *ngIf="infoForm.value.categoryState.subcategory.length">
+            <select formControlName="subcategoryState" class="form-control">
+              <option *ngFor="let subcategoryState of infoForm.value.categoryState.subcategory" [ngValue]="subcategoryState">
+                {{ subcategoryState }}
+              </option>
+            </select>
+          </div>
+  
+          <div *ngIf="!infoForm.value.categoryState.subcategory.length">
+            <fieldset disabled>
+              <input class="form-control" placeholder="Для данной категории нет подкатегорий">
+            </fieldset>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  
+    <div class="form-group row form-item">
+      <div class="col-md-1"></div>
+      <label for="category" class="col-md-2 col-form-label">Сумма<span class="obliged">*</span></label>
+      <div class="col-md-8">
+        <!-- to do: (keypress)="onCashChange($event)"-->
+        <input class="form-control" type="text" formControlName="cash">
+      </div>
+    </div>
+  
+    <div class="form-group row form-item">
+      <div class="col-md-1"></div>
+      <label for="category" class="col-md-2 col-form-label">Дата</label>
+      <div class="col-md-8">
+        <input type="text" placeholder={{showDate()}} class="form-control" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+        formControlName="date" bsDatepicker>
+      </div>
+    </div>
+  
+    <div class="form-group row form-item">
+      <div class="col-md-1"></div>
+      <label for="category" class="col-md-2 col-form-label">Комментарий</label>
+      <div class="col-md-8">
+        <input class="form-control" formControlName="comment">
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <input type="submit" class="btn btn-primary" value="Сохранить" [disabled]="infoForm.invalid">
+        <button type="button" class="btn btn-danger" (click)="goBack()">Отменить</button>
+      </div>
+    </div>
+  
+  </form>
+  
