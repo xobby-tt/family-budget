@@ -6,7 +6,7 @@ import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   { path: 'info', component: InfoComponent},
-  { path: 'add', component: AddComponent},
+  { path: 'info/entity', component: AddComponent},
   { path: '', redirectTo: '/info', pathMatch: 'full' },
 ];
 

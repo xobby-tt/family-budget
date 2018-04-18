@@ -16,7 +16,7 @@ export class ResultComponent implements OnInit {
 
   @Input() date: Date[];
 
-  items: Info[] = [];
+  @Input() items: Info[] = [];
   sortedByDate: Info[] = [];
   categories: Category[];
   categoryCash: CategoryCash[] = [];
@@ -25,18 +25,8 @@ export class ResultComponent implements OnInit {
   constructor(private infoService: InfoService, private categoryService: CategoryService) { }
 
   ngOnInit() {
-    this.getInfo();
-    this.sortByDate();
     this.getCategories();
     this.onSelect("income");
-  }
-
-  ngDoCheck() {
-    this.sortByDate();
-  }
-
-  getInfo(): void {
-    this.infoService.getInfo().subscribe(info => this.items = info)
   }
 
   getCategories(): void {
@@ -44,12 +34,14 @@ export class ResultComponent implements OnInit {
   }
 
   sortByDate(): void {
-    var items = this.infoService.sortByDate(this.date);
-    if (items)
-      this.sortedByDate = items;
+    var sorted = this.infoService.sortByDate(this.items, this.date);
+    if (sorted)
+      this.sortedByDate = sorted;
   }
 
   getResult(): number {
+    this.sortByDate();
+
     var temp: object = {};
     var sum: number = 0;
 
@@ -60,6 +52,7 @@ export class ResultComponent implements OnInit {
   }
 
   onSelect(condition: string): void {
+    this.sortByDate();
     this.categoryCash = [];
 
     for (let categoryItem of this.categories) {

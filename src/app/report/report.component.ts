@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Info } from '../info';
 
 @Component({
   selector: 'app-report',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ReportComponent {
+
+  @Input() items: Info[] = [];
+
   date: Date[];
   condition: boolean = false;
 
