@@ -25,6 +25,7 @@ export class ResultComponent implements OnInit {
   constructor(private infoService: InfoService, private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.sortByDate();
     this.getCategories();
     this.onSelect("income");
   }
@@ -34,16 +35,14 @@ export class ResultComponent implements OnInit {
   }
 
   sortByDate(): void {
-    var sorted = this.infoService.sortByDate(this.items, this.date);
+    let sorted = this.infoService.sortByDate(this.items, this.date[0], this.date[1]);
     if (sorted)
       this.sortedByDate = sorted;
   }
 
   getResult(): number {
-    this.sortByDate();
-
-    var temp: object = {};
-    var sum: number = 0;
+    let temp: object = {};
+    let sum: number = 0;
 
     for (let item of this.sortedByDate)
       sum += item.cash;
@@ -52,14 +51,13 @@ export class ResultComponent implements OnInit {
   }
 
   onSelect(condition: string): void {
-    this.sortByDate();
     this.categoryCash = [];
-
+ 
     for (let categoryItem of this.categories) {
-      var sum = 0;
+      let sum = 0;
       for (let item of this.sortedByDate) {
-        if (categoryItem.category == item.category) {
-          if (condition == "income" ? (item.cash > 0) : (item.cash < 0)) {
+        if (categoryItem.category === item.category) {
+          if (condition === "income" ? (item.cash > 0) : (item.cash < 0)) {
             sum += item.cash;
           }
         }
@@ -67,7 +65,7 @@ export class ResultComponent implements OnInit {
       if (sum)
         this.categoryCash.push(new CategoryCash(categoryItem.category, sum));
     }
-    if (this.selected.indexOf(condition) == -1)
+    if (this.selected.indexOf(condition) === -1)
       this.selected = condition;
   }
 }

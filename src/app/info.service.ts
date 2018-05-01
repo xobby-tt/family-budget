@@ -25,22 +25,17 @@ export class InfoService {
         return this.http.get<Info[]>("api/info");
     }
 
-    addInfo(category: string, subcategory: string, person: string, cash: number, date: string, comment: string) {
+    addInfo(category: string, subcategory: string, person: string, cash: number, date: string, comment: string): Observable<Info> {
         //this.data.push(new Info(category, subcategory, person, cash, date, comment));
-        this.http.post<Info>("api/info/entity", new Info(category, subcategory, person, cash, date, comment), this.httpOptions);
+        return this.http.post<Info>("api/info/entity", new Info(category, subcategory, person, cash, date, comment), this.httpOptions);
     }
 
-    sortByDate(items: Info[], date: Date[]): Info[] {
-        var temp: Info[] = [];
-        var dateItem: Date
-
-        for (var item of items) {
-            dateItem = new Date(item.date);
-            if (dateItem.valueOf() > date[0].valueOf() && dateItem.valueOf() < date[1].valueOf())
-                temp.push(item);
-        }
-
-        return temp;
+    sortByDate(items: Info[], startDate: Date, endDate: Date): Info[] {
+        return items.filter(item => {
+            let date = new Date(item.date);
+        
+            return date.valueOf() > startDate.valueOf() && date.valueOf() < endDate.valueOf();
+        });
     }
 
 }

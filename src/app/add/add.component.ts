@@ -60,8 +60,9 @@ export class AddComponent implements OnInit {
       this.infoForm.value.date = this.today;
     } else this.infoForm.value.date = new Date(this.infoForm.value.date);
 
-    this.infoService.addInfo(this.infoForm.value.categoryState.category, this.infoForm.value.subcategoryState, this.infoForm.value.personState.name, +this.infoForm.value.cash, this.infoForm.value.date, this.infoForm.value.comment);
-    this.location.back();
+    this.infoService.addInfo(this.infoForm.value.categoryState.category, this.infoForm.value.subcategoryState, this.infoForm.value.personState.name, +this.infoForm.value.cash, this.infoForm.value.date, this.infoForm.value.comment)
+    .subscribe(() => this.location.back()) ;
+    // this.location.back();
   }
 
   showDate(): string {
